@@ -21,6 +21,18 @@ class _HomeState extends State<Home> {
 
   List _toDoList = [];
 
+  //ADNER: Sobrescreve o método que sempre é executado ao abrir o aplicativo
+  //E nele realiza a consulta do JSON com os dados salvos no arquivo JSON
+  @override
+  void initState() {
+    super.initState();
+    _readData().then((data) {
+      setState(() {
+        _toDoList = json.decode(data);
+      });
+    });
+  }
+
   //ADNER: FUNÇÃO PARA ADICIONAR O TEXTO DO CAMPO NA LISTA
   void _addToDo() {
     //O setState atualiza o estado da tela (refresh)
@@ -32,6 +44,7 @@ class _HomeState extends State<Home> {
       newToDo["ok"] = false;
 
       _toDoList.add(newToDo);
+      _saveData();
     });
   }
 
@@ -86,8 +99,10 @@ class _HomeState extends State<Home> {
                           _toDoList[index]["ok"] ? Icons.check : Icons.error),
                     ),
                     onChanged: (c) {
+                      //ADNER: Evento ao marcar ou desmarcar o checkbox
                       setState(() {
                         _toDoList[index]["ok"] = c;
+                        _saveData();
                       });
                     },
                   );
