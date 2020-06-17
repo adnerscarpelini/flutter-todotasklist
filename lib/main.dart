@@ -52,6 +52,28 @@ class _HomeState extends State<Home> {
     });
   }
 
+  //ADNER: Função para atualizar a página quando puxar pra baixo
+  //Estilo feed do Facebook
+  Future<Null> _refresh() async {
+    await Future.delayed(Duration(seconds: 1));
+
+    //Ordenar a Lista com o que tem pra fazer no topo
+    setState(() {
+      _toDoList.sort((a, b) {
+        if (a["ok"] && !b["ok"])
+          return 1;
+        else if (!a["ok"] && b["ok"])
+          return -1;
+        else
+          return 0;
+      });
+
+      _saveData();
+    });
+
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,14 +108,19 @@ class _HomeState extends State<Home> {
             ),
           ),
           Expanded(
-            //ADNER: O Builder faz contruir a lista somente quando rola a tela
-            //Ou seja, se tiver 1000 itens, ele vai construindo a lista durante a
-            //rolagem, economizando recursos do aparelho
-            child: ListView.builder(
-                padding: EdgeInsets.only(top: 10.0),
-                //Passo quantos itens vai ter a lista
-                itemCount: _toDoList.length,
-                itemBuilder: _buildItem),
+            //ADNER: O RefreshIndicator faz atualizar a tela quando puxa para baixo
+            child: RefreshIndicator(
+              onRefresh: _refresh,
+
+              //ADNER: O Builder faz contruir a lista somente quando rola a tela
+              //Ou seja, se tiver 1000 itens, ele vai construindo a lista durante a
+              //rolagem, economizando recursos do aparelho
+              child: ListView.builder(
+                  padding: EdgeInsets.only(top: 10.0),
+                  //Passo quantos itens vai ter a lista
+                  itemCount: _toDoList.length,
+                  itemBuilder: _buildItem),
+            ),
           )
         ],
       ),
@@ -162,6 +189,7 @@ class _HomeState extends State<Home> {
             ),
             duration: Duration(seconds: 2),
           );
+          Scaffold.of(context).removeCurrentSnackBar();
           Scaffold.of(context).showSnackBar(snack);
         });
       },
