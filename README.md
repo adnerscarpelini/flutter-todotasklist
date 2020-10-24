@@ -1,16 +1,22 @@
-# flutterlistatarefas
+# Flutter - ToDo List App
+A ToDo Tasks List app using Flutter SDK 1.17
 
-Lista de Tarefas com armazenamento local
+![List](https://raw.githubusercontent.com/adnerscarpelini/flutter_lista_tarefas/master/ImagensFinal/Screenshot_1.png "List")
 
-## Getting Started
+![Delete](https://raw.githubusercontent.com/adnerscarpelini/flutter_lista_tarefas/master/ImagensFinal/Screenshot_2.png "Delete")
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+### 🚀 Technologies
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+This project was developed with the following technologies:
+- Flutter
+- Dart
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### ℹ️ How To Use
+To clone and run this application, you'll need Git, Android Studio and Flutter SDK 1.17 installed on your computer. From your command line:
+
+1.  Clone this repository:  $ git clone
+https://github.com/adnerscarpelini/flutter_lista_tarefas.git
+
+2.  Build  and  run the app with Android Studio
+https://developer.android.com/studio/run
